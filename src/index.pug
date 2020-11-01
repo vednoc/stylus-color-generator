@@ -10,9 +10,17 @@ html(lang="en")
 
         main
             each val in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                ul(class='_c' + val)
+                ul(class='colors _c' + val)
                     each num in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                         li(class='c' + num)= val + '' + num
 
-            //- h2 debug
-            //- p.debug
+            // Enable debugging.
+            - var debug = true
+
+            if debug
+                h2(style='padding-top: 1rem') Debug
+                p.debug
+
+                ul
+                    each val in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        li(class='debug-' + val)

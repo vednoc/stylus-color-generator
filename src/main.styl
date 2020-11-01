@@ -23,7 +23,7 @@ for c, i in C {
             $res = hsl(C[c].hue, 100 - num * 2, (num + 2) * 8)
             // $res = tint($res, num * 2)
         } else {
-            $res = hsl(C[c].hue, 0, (num + 2) * 7)
+            $res = hsl(C[c].hue, 0, (num + 2) * 8)
             // $res = shade($res, num * 2)
         }
         $dbg = '' + c + '-' + num + ' ::: ' + $res
@@ -34,7 +34,7 @@ for c, i in C {
 for col in 0..9 {
     for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
         for position in 0..9 {
-            ul._{ color } .c{ position } {
+            ul.colors._{ color } .c{ position } {
                 background: color + position
                 //{ s('--%s-%s', color, position)}: color + position
             }
@@ -44,4 +44,11 @@ for col in 0..9 {
 
 .debug::before {
     content: $dbg
+    font-style: italic
+}
+
+for i in 0..9 {
+    .debug-{ i }::before {
+        content: '' + i + ' -> ' + (c9 + i)
+    }
 }

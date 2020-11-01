@@ -4,7 +4,6 @@ html {
 
     body {
         font-family: serif
-        text-align: center
         display: flex
         flex-direction: column
         justify-content: center
@@ -12,25 +11,31 @@ html {
         min-height: calc(100vh - 20px)
     }
 
+    h1 {
+        text-align: center
+    }
+
     a { color: crimson }
 
     ul {
         margin: 0
         padding: 0
-        display: flex
         list-style: none
 
-        &:not(:last-child) {
-            margin-bottom: -1rem
+        &.colors {
+            display: flex
+            &:not(:last-child) {
+                margin-bottom: -1rem
+            }
         }
 
-        li {
+        &.colors li {
             width: 4rem
             height: @width
             line-height: @width
             text-align: center
-            border-radius: 2.5rem
-            box-shadow: 0 0 4px #0005
+            border-radius: 2.0rem
+            box-shadow: 0 0 4px #0003
 
             &:not(:first-child) {
                 margin: 0 0 0 -1rem
