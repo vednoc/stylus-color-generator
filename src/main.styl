@@ -31,13 +31,11 @@ for c, i in C {
     }
 }
 
-for col in 0..9 {
-    for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
-        for position in 0..9 {
-            ul.colors._{ color } .c{ position } {
-                background: color + position
-                //{ s('--%s-%s', color, position)}: color + position
-            }
+for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
+    for position in 0..9 {
+        ul.colors._{ color } .c{ position } {
+            background: color + position
+            //{ s('--%s-%s', color, position)}: color + position
         }
     }
 }
