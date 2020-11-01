@@ -2,15 +2,16 @@
     "name": "vanilla",
     "version": "1.0.0",
     "description": "JavaScript example starter project",
-    "main": "index.html",
+    "main": "index.pug",
     "scripts": {
-        "start": "parcel index.html --open",
-        "build": "parcel build index.html"
+        "start": "parcel index.pug",
+        "open": "parcel index.pug --open",
+        "build": "parcel build index.pug"
     },
     "dependencies": {},
     "devDependencies": {
-        "@babel/core": "7.2.0",
-        "parcel-bundler": "^1.6.1"
-    },
-    "keywords": ["javascript", "starter"]
+        "parcel-bundler": "^1.12.4",
+        "pug": "^3.0.0",
+        "stylus": "^0.54.8"
+    }
 }
