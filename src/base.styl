@@ -1,0 +1,53 @@
+html {
+    color: white
+    background: black
+
+    body {
+        font-family: serif
+        text-align: center
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        min-height: calc(100vh - 20px)
+    }
+
+    a { color: crimson }
+
+    ul {
+        margin: 0
+        padding: 0
+        display: flex
+        list-style: none
+
+        &:not(:last-child) {
+            margin-bottom: -1rem
+        }
+
+        li {
+            width: 4rem
+            height: @width
+            line-height: @width
+            text-align: center
+            border-radius: 2.5rem
+            box-shadow: 0 0 4px #0005
+
+            &:not(:first-child) {
+                margin: 0 0 0 -1rem
+            }
+
+            &[class] {
+                c = #3334
+                color: #eee
+                background-color: #333
+                text-shadow: \
+                    -1px -1px 0 c, \
+                     1px  1px 0 c, \
+                     1px -1px 0 c, \
+                    -1px  1px 0 c
+                // color: transparent
+                // text-shadow: none
+            }
+        }
+    }
+}
