@@ -2,11 +2,11 @@
     "name": "vanilla",
     "version": "1.0.0",
     "description": "JavaScript example starter project",
-    "main": "index.pug",
+    "main": "src/index.pug",
     "scripts": {
-        "start": "parcel index.pug",
-        "open": "parcel index.pug --open",
-        "build": "parcel build index.pug"
+        "start": "parcel src/index.pug",
+        "open": "parcel src/index.pug --open",
+        "build": "parcel build src/index.pug"
     },
     "dependencies": {},
     "devDependencies": {
