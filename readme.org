@@ -1,0 +1,3 @@
+* Stylus Color Generator
+This is a playground for trying out ideas that will later result in a full-blown
+procedural color generation used by [[https://github.com/vednoc/userstyles][my userstyles]] in [[https://github.com/openstyles/stylus][Stylus]] browser extension.
