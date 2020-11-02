@@ -1,5 +1,7 @@
 @import 'base.styl'
 
+$showNumbers = 0
+
 $dgb = ''
 
 C = {
@@ -48,5 +50,13 @@ for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
 for i in 0..9 {
     .debug-{ i }::before {
         content: '' + i + ' -> ' + (c9 + i)
+    }
+}
+
+unless($showNumbers) {
+    ul.colors li[class] {
+        color: transparent !important
+        text-shadow: none !important
+        box-shadow: none !important
     }
 }
