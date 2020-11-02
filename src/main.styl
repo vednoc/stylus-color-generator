@@ -24,21 +24,21 @@ for c, i in C {
     for num in 0..9 {
         $res = ''
         if (c != 'c9') {
-            $res = hsl(C[c].hue, 100 - num * 2, (num + 2) * 8)
+            $res = hsl(C[c].hue - num * 1.5, 88 - num * 3, (16 + (num + 1) * 8/1.5))
             // $res = tint($res, num * 2)
         } else {
             $res = hsl(C[c].hue, 0, (num + 2) * 8)
             // $res = shade($res, num * 2)
         }
-        $dbg = '' + c + '-' + num + ' ::: ' + $res
-        define('' + c + num, $res, g)
+        $dbg = c + '-' + num + ' ::: ' + $res
+        define(c + '-' + num, $res, g)
     }
 }
 
 for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
     for position in 0..9 {
         ul.colors._{ color } .c{ position } {
-            background: color + position
+            background: color + '-' + position
             //{ s('--%s-%s', color, position)}: color + position
         }
     }
@@ -51,7 +51,9 @@ for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + i + ' -> ' + (c9 + i)
+        content: '' + i + ' -> ' + (c4- + i)
+        font-family: monospace
+        font-size: 1rem
     }
 }
 
