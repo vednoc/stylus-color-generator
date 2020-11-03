@@ -6,6 +6,13 @@ $dgb = ''
 FG = #e6e6e6
 BG = #232629
 
+to_hsla(input, $c = {}) {
+    $c.hue = unquote(split('deg', '%s' % ceil(hue(input), 2))[0])
+    $c.saturation = ceil(saturation(input), 2)
+    $c.lightness = ceil(lightness(input), 2)
+    s('hsla(%s,%s,%s,1)', $c.hue, $c.saturation, $c.lightness)
+}
+
 C = {
     c1: { hue: 000deg, }, //red
     c2: { hue: 030deg, }, //orange
@@ -30,6 +37,7 @@ for c, i in C {
             $res = hsl(C[c].hue, 0, (num + 2) * 8)
             // $res = shade($res, num * 2)
         }
+        $res = to_hsla($res)
         $dbg = c + '-' + num + ' ::: ' + $res
         define(c + '-' + num, $res, g)
     }
