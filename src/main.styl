@@ -15,6 +15,7 @@ to_hsla(input, $c = {}) {
 }
 
 C = {
+    v0: { ac: #7289da, },
     v1: { hue: 000deg, }, //red
     v2: { hue: 030deg, }, //orange
     v3: { hue: 060deg, }, //yellow
@@ -31,7 +32,10 @@ for c, i in C {
     // $dbg = 'k: ' + c + ' ::: i: ' + i + ' ::: val: ' + $hue
     for num in 0..9 {
         $res = ''
-        if (c != 'v9') {
+        if (c == 'v0') {
+            $offset = (num < 2) ? 1.0 : 1.5
+            $res = darken(C[c].ac, 100% - (num + $offset) * 14)
+        } else if (c != 'v9') {
             $h = C[c].hue + num / 2
             $s = 100 - num * 8
             $offset = (num < 2) ? 1.0 : 1.5
@@ -64,7 +68,7 @@ for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + i + ' -> ' + (v4- + i)
+        content: '' + i + ' -> ' + (v0- + i)
         font-family: monospace
         font-size: 1rem
     }
