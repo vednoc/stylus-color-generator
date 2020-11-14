@@ -32,11 +32,13 @@ for c, i in C {
     for num in 0..9 {
         $res = ''
         if (c != 'v9') {
-            $res = hsl(C[c].hue - num * 1.5, 88 - num * 3, (16 + (num + 1) * 8/1.5))
-            // $res = tint($res, num * 2)
+            $h = C[c].hue + num / 2
+            $s = 100 - num * 8
+            $offset = (num < 2) ? 1.0 : 1.5
+            $l = 5 + (num + $offset) * 5
+            $res = hsl($h, $s, $l)
         } else {
             $res = hsl(C[c].hue, 0, (num + 2) * 8)
-            // $res = shade($res, num * 2)
         }
         $res = darken($res, SA)
         $res = to_hsla($res)
