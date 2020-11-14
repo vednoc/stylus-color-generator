@@ -14,15 +14,15 @@ to_hsla(input, $c = {}) {
 }
 
 C = {
-    c1: { hue: 000deg, }, //red
-    c2: { hue: 030deg, }, //orange
-    c3: { hue: 060deg, }, //yellow
-    c4: { hue: 120deg, }, //green
-    c5: { hue: 180deg, }, //cyan
-    c6: { hue: 210deg, }, //blue
-    c7: { hue: 270deg, }, //magenta
-    c8: { hue: 300deg, }, //violet
-    c9: { hue: 000deg, }, //gray
+    v1: { hue: 000deg, }, //red
+    v2: { hue: 030deg, }, //orange
+    v3: { hue: 060deg, }, //yellow
+    v4: { hue: 120deg, }, //green
+    v5: { hue: 180deg, }, //cyan
+    v6: { hue: 210deg, }, //blue
+    v7: { hue: 270deg, }, //magenta
+    v8: { hue: 300deg, }, //violet
+    v9: { hue: 000deg, }, //gray
 }
 
 for c, i in C {
@@ -30,7 +30,7 @@ for c, i in C {
     $dbg = 'k: ' + c + ' ::: i: ' + i + ' ::: val: ' + $hue
     for num in 0..9 {
         $res = ''
-        if (c != 'c9') {
+        if (c != 'v9') {
             $res = hsl(C[c].hue - num * 1.5, 88 - num * 3, (16 + (num + 1) * 8/1.5))
             // $res = tint($res, num * 2)
         } else {
@@ -39,11 +39,12 @@ for c, i in C {
         }
         $res = to_hsla($res)
         $dbg = c + '-' + num + ' ::: ' + $res
-        define(c + '-' + num, $res, g)
+        define(c + num, s('var(--%s-%s)', unquote(c), num), global)
+        define(c + '-' + num, $res, global)
     }
 }
 
-for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
+for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
     for position in 0..9 {
         ul.colors._{ color } .c{ position } {
             background: color + '-' + position
@@ -59,7 +60,7 @@ for color in (c0 c1 c2 c3 c4 c5 c6 c7 c8 c9) {
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + i + ' -> ' + (c4- + i)
+        content: '' + i + ' -> ' + (v4- + i)
         font-family: monospace
         font-size: 1rem
     }
