@@ -33,12 +33,12 @@ for c, i in C {
     for num in 0..9 {
         $res = ''
         if (c == 'v0') {
-            $offset = (num < 2) ? 1.0 : 1.5
-            $res = darken(C[c].ac, 100% - (num + $offset) * 14)
+            $offset = (num < 2) ? 0.8 : 1.6
+            $res = darken(C[c].ac, 100% - (num + $offset) * 12)
         } else if (c != 'v9') {
             $h = C[c].hue + num / 2
             $s = 100 - num * 8
-            $offset = (num < 2) ? 1.0 : 1.5
+            $offset = (num < 2) ? 0.8 : 1.6
             $l = 5 + (num + $offset) * 5
             $res = hsl($h, $s, $l)
         } else {
