@@ -7,6 +7,7 @@ FG = #e6e6e6
 BG = #232629
 SA = 0%
 
+// {{{ Mixins
 to_hsla(input, $c = {}) {
     $c.hue = unquote(split('deg', '%s' % ceil(hue(input), 2))[0])
     $c.saturation = ceil(saturation(input), 2)
@@ -23,7 +24,9 @@ prettyHSLA(x) {
     $s = base-convert(round(convert(xs[2])), 10, 3)
     return s('hue: %s, lig: %s%, sat: %s%, alpha: %s', $h, $l, $s, $t)
 }
+// }}}
 
+// {{{ Color generator
 C = {
     v0: { ac: #7289da, },
     v1: { hue: 000deg, }, //red
@@ -70,7 +73,9 @@ for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
         }
     }
 }
+// }}}
 
+// {{{ Debug
 .debug::before {
     content: $dbg
     font-style: italic
@@ -96,3 +101,4 @@ html {
     color: FG
     background: BG
 }
+// }}}
