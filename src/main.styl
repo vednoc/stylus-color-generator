@@ -14,6 +14,16 @@ to_hsla(input, $c = {}) {
     s('hsla(%s,%s,%s,1)', $c.hue, $c.saturation, $c.lightness)
 }
 
+prettyHSLA(x) {
+    xs = replace('[hsla\(\)]', '', x)
+    xs = split(',', xs)
+    $t = convert(xs[3])
+    $h = base-convert(round(convert(xs[0])), 10, 3)
+    $l = base-convert(round(convert(xs[1])), 10, 3)
+    $s = base-convert(round(convert(xs[2])), 10, 3)
+    return s('hue: %s, lig: %s%, sat: %s%, alpha: %s', $h, $l, $s, $t)
+}
+
 C = {
     v0: { ac: #7289da, },
     v1: { hue: 000deg, }, //red
@@ -68,7 +78,7 @@ for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + i + ' -> ' + (v0- + i)
+        content: '' + prettyHSLA(v0- + i)
         font-family: monospace
         font-size: 1rem
     }
