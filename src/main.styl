@@ -19,10 +19,10 @@ prettyHSLA(x) {
     xs = replace('[hsla\(\)]', '', x)
     xs = split(',', xs)
     $t = convert(xs[3])
-    $h = base-convert(round(convert(xs[0])), 10, 3)
-    $l = base-convert(round(convert(xs[1])), 10, 3)
-    $s = base-convert(round(convert(xs[2])), 10, 3)
-    return s('hue: %s, lig: %s%, sat: %s%, alpha: %s', $h, $l, $s, $t)
+    $h = base-convert(convert(xs[0]), 10, 3)
+    $s = base-convert(convert(xs[1]), 10, 3)
+    $l = base-convert(convert(xs[2]), 10, 3)
+    return s('hue: %s, sat: %s%, lig: %s%, alpha: %s', $h, $s, $l, $t)
 }
 // }}}
 
