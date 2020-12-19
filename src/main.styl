@@ -41,6 +41,32 @@ C = {
 }
 
 for c, i in C {
+    $dbg += ' c: ' + c + ' i: ' + i
+    // if c == v9 { $dbg += '' + c + i }
+
+    for num in 0..9 {
+        /// Case for accent colors.
+        if (c == v0) {
+            $color = darken(C[c].ac, (num+3) * 4.5)
+            $color = to_hsla($color)
+        }
+        /// Case for RGB colors.
+        else {
+            $hue = C[c].hue
+            $color = hsl($hue, 70%, 70%)
+            $color = darken($color, (num+2) * 4.5)
+            $color = lightness($color, lightness($color) - (num+5))
+            $color = to_hsla($color)
+        }
+
+        /// Expose color variables.
+        define(c + num, s('var(--%s-%s)', unquote(c), num), global)
+        define(c + '-' + num, $color, global)
+    }
+}
+
+/*
+for c, i in C {
     $hue = C[c].hue
     // $dbg = 'k: ' + c + ' ::: i: ' + i + ' ::: val: ' + $hue
     for num in 0..9 {
@@ -64,6 +90,7 @@ for c, i in C {
         define(c + '-' + num, $res, global)
     }
 }
+*/
 
 for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
     for position in 0..9 {
