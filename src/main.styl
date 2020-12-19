@@ -76,14 +76,18 @@ for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
 // }}}
 
 // {{{ Debug
-.debug::before {
-    content: $dbg
-    font-style: italic
+.debug {
+    max-width: 496px
+
+    &::before {
+        content: $dbg
+        font-style: italic
+    }
 }
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + prettyHSLA(v0- + i)
+        content: '' + prettyHSLA(v1- + i)
         font-family: monospace
         font-size: 1rem
     }
