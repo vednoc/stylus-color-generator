@@ -1,7 +1,7 @@
 @import 'base.styl'
 
 $showNumbers = 0
-$dgb = ''
+$dbg = ''
 
 FG = #e6e6e6
 BG = #232629
@@ -47,7 +47,7 @@ for c, i in C {
     for num in 0..9 {
         /// Case for accent colors.
         if (c == v0) {
-            $color = darken(C[c].ac, (num+3) * 4.5)
+            $color = darken(C[c].ac, (-8 + (num+5) * 5))
             $color = to_hsla($color)
         }
         /// Case for RGB colors.
