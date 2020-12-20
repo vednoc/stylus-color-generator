@@ -1,6 +1,7 @@
 @import 'base.styl'
 
 $showNumbers = 0
+$inspect = v9
 $dbg = ''
 
 FG = #e6e6e6
@@ -54,7 +55,7 @@ for c, i in C {
         /// Case for gray colors.
         else if (c == v9) {
             $color = hsl(C[c].hue, 0%, 50%)
-            $color = darken($color, (100% - (-18 + (num+3) * 12)))
+            $color = darken($color, (100% - (num+2) * 15))
             $color = to_hsla($color)
         }
 
@@ -122,7 +123,7 @@ for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
 
 for i in 0..9 {
     .debug-{ i }::before {
-        content: '' + prettyHSLA(v1- + i)
+        content: '' + prettyHSLA($inspect + '-' + i)
         font-family: monospace
         font-size: 1rem
     }
