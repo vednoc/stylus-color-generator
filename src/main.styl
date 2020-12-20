@@ -47,14 +47,14 @@ for c, i in C {
     for num in 0..9 {
         /// Case for accent colors.
         if (c == v0) {
-            $color = darken(C[c].ac, (-8 + (num+5) * 5))
+            $color = darken(C[c].ac, (100% - (-18 + (num+5) * 7.5)))
             $color = to_hsla($color)
         }
 
         /// Case for gray colors.
         else if (c == v9) {
             $color = hsl(C[c].hue, 0%, 50%)
-            $color = darken($color, (-12 + (num+2) * 5))
+            $color = darken($color, (100% - (-18 + (num+3) * 12)))
             $color = to_hsla($color)
         }
 
@@ -62,8 +62,8 @@ for c, i in C {
         else {
             $hue = C[c].hue
             $color = hsl($hue, 70%, 70%)
-            $color = darken($color, (num+2) * 4.5)
-            $color = lightness($color, lightness($color) - (num+5))
+            $color = darken($color, (100% - (num+2) * 7.5))
+            $color = lightness($color, lightness($color) + (num))
             $color = to_hsla($color)
         }
 
