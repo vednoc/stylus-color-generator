@@ -50,6 +50,14 @@ for c, i in C {
             $color = darken(C[c].ac, (-8 + (num+5) * 5))
             $color = to_hsla($color)
         }
+
+        /// Case for gray colors.
+        else if (c == v9) {
+            $color = hsl(C[c].hue, 0%, 50%)
+            $color = darken($color, (-12 + (num+2) * 5))
+            $color = to_hsla($color)
+        }
+
         /// Case for RGB colors.
         else {
             $hue = C[c].hue
