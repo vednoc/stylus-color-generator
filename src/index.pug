@@ -10,9 +10,9 @@ html(lang="en")
 
         main
             each val in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                ul(class='colors _v' + val)
+                ul(class='colors v' + val)
                     each num in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        li(class='c' + num)= val + '' + num
+                        li(class='v' + val + num)= val + num
 
             // Enable debugging.
             - var debug = true

@@ -124,7 +124,7 @@ for c, i in C {
 
 for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
     for position in 0..9 {
-        ul.colors._{ color } .c{ position } {
+        ul.colors.{ color } { '.%s%s' % ((color) (position)) } {
             background: color + '-' + position
             //{ s('--%s-%s', color, position)}: color + position
         }
