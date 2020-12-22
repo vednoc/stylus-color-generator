@@ -9,10 +9,12 @@ html(lang="en")
         h1 Stylus color generator
 
         main
-            each val in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                ul(class='colors v' + val)
-                    each num in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        li(class='v' + val + num)= val + num
+            - var array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+            each color in array
+                ul(class='colors v' + color)
+                    each tone in array
+                        li(class='v' + color + tone)= '' + color + tone
 
             // Enable debugging.
             - var debug = true
@@ -22,5 +24,5 @@ html(lang="en")
                 p.debug
 
                 ul
-                    each val in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        li(class='debug-' + val)
+                    each num in array
+                        li(class='debug-' + num)
