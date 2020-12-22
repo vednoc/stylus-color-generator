@@ -1,12 +1,9 @@
 @import 'base.styl'
 
+$selected = 'custom'
 $showNumbers = 0
 $inspect = v0
 $dbg = ''
-
-FG = #e6e6e6
-BG = #232629
-SA = 0%
 
 // {{{ Mixins
 to_hsla(input, $c = {}) {
@@ -28,8 +25,24 @@ prettyHSLA(x) {
 // }}}
 
 // {{{ Color generator
+// Generator -> Color-schemes.
+ColorSchemes = {
+    'custom':               { BG: #000000, FG: #ffffff, AC: #66ff66 }
+}
+
+// Generator -> Active color-scheme.
+for color-scheme in ColorSchemes {
+    if (color-scheme == $selected) {
+        main { dbg: s('%s, %s', color-scheme, $selected) }
+        define('BG', ColorSchemes[color-scheme].BG, global)
+        define('FG', ColorSchemes[color-scheme].FG, global)
+        define('AC', ColorSchemes[color-scheme].AC, global)
+    }
+}
+
+// Generator -> Hues.
 C = {
-    v0: { ac: #7289da, },
+    v0: { ac:      AC, },
     v1: { hue: 000deg, }, //red
     v2: { hue: 030deg, }, //orange
     v3: { hue: 060deg, }, //yellow
@@ -76,6 +89,7 @@ for c, i in C {
 }
 
 /*
+SA = 0%
 for c, i in C {
     $hue = C[c].hue
     // $dbg = 'k: ' + c + ' ::: i: ' + i + ' ::: val: ' + $hue
