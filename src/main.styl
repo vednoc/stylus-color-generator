@@ -122,11 +122,12 @@ for c, i in C {
 }
 */
 
-for color in (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9) {
-    for position in 0..9 {
-        ul.colors.{ color } { '.%s%s' % ((color) (position)) } {
-            background: color + '-' + position
-            //{ s('--%s-%s', color, position)}: color + position
+/// Generate list item colors.
+colors = (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
+for color in colors {
+    for tone in 0..9 {
+        ul.colors.{ color } { '.%s%s' % ((color) (tone)) } {
+            background-color: color + '-' + tone
         }
     }
 }
