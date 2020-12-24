@@ -37,10 +37,13 @@ ColorSchemes = {
 // Generator -> Active color-scheme.
 for color-scheme in ColorSchemes {
     if (color-scheme == $selected) {
-        main { dbg: s('%s, %s', color-scheme, $selected) }
         define('BG', ColorSchemes[color-scheme].BG, global)
         define('FG', ColorSchemes[color-scheme].FG, global)
         define('AC', ColorSchemes[color-scheme].AC, global)
+        debug {
+            selected: s('%s, %s', color-scheme, $selected)
+            exposed: s('bg(%s), fg(%s), ac(%s)', BG, FG, AC)
+        }
     }
 }
 
