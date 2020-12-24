@@ -133,34 +133,6 @@ for c, i in colors[2..length(colors)] {
     }
 }
 
-/*
-SA = 0%
-for c, i in C {
-    $hue = C[c].hue
-    // $dbg = 'k: ' + c + ' ::: i: ' + i + ' ::: val: ' + $hue
-    for num in 0..9 {
-        $res = ''
-        if (c == 'v0') {
-            $offset = (num < 2) ? 0.8 : 1.6
-            $res = darken(C[c].ac, 100% - (num + $offset) * 12)
-        } else if (c != 'v9') {
-            $h = C[c].hue + num / 2
-            $s = 100 - num * 8
-            $offset = (num < 2) ? 0.8 : 1.6
-            $l = 5 + (num + $offset) * 5
-            $res = hsl($h, $s, $l)
-        } else {
-            $res = hsl(C[c].hue, 0, (num + 2) * 8)
-        }
-        $res = darken($res, SA)
-        $res = to_hsla($res)
-        $dbg = c + '-' + num + ' ::: ' + $res
-        define(c + num, s('var(--%s-%s)', unquote(c), num), global)
-        define(c + '-' + num, $res, global)
-    }
-}
-*/
-
 /// Generate CSS variables.
 colors = (bg fg v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
 :root {
