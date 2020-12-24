@@ -44,24 +44,21 @@ for color-scheme in ColorSchemes {
     }
 }
 
-// Generator -> Hues.
-C = {
-    v0: { ac:      AC, },
-    v1: { hue: 000deg, }, //red
-    v2: { hue: 030deg, }, //orange
-    v3: { hue: 060deg, }, //yellow
-    v4: { hue: 120deg, }, //green
-    v5: { hue: 180deg, }, //cyan
-    v6: { hue: 210deg, }, //blue
-    v7: { hue: 270deg, }, //magenta
-    v8: { hue: 300deg, }, //violet
-    v9: { hue: 000deg, }, //gray
-}
-
-// List with anonymous hashes.
+// Generator -> Color values/hues.
+// NOTE: List with anonymous hashes.
 colors = (
-    { key: bg, color: BG } \
-    { key: fg, color: FG } \
+    { key: bg, color:   BG } \
+    { key: fg, color:   FG } \
+    { key: v0, color:   AC } \
+    { key: v1, hue:   0deg } \
+    { key: v2, hue:  30deg } \
+    { key: v3, hue:  60deg } \
+    { key: v4, hue: 120deg } \
+    { key: v5, hue: 180deg } \
+    { key: v6, hue: 210deg } \
+    { key: v7, hue: 270deg } \
+    { key: v8, hue: 300deg } \
+    { key: v9, hue:   0deg } \
 )
 
 // Alias colors.
@@ -96,37 +93,39 @@ for num in 0..5 {
     define('' + s('%s-%s', $fg.key, num), $color, global)
 }
 
-for c, i in C {
-    // $dbg += ' c: ' + c + ' i: ' + i
-    // if c == v9 { $dbg += '' + c + i }
+for c, i in colors[2..length(colors)] {
+    // $dbg += s('::: c: %s, i: %s; ', c, i )
+    // if c.key == v9 { $dbg += s('::: c: %s, i: %s; ', c, i ) }
+    $sel  = colors[i+2]
+    $dbg += ' ' + $sel
 
     for num in 0..9 {
         /// Case for accent colors.
-        if (c == v0) {
-            $color = darken(C[c].ac, (100% - (num+3) * 7.5))
+        if ($sel.key == v0) {
+            $color = darken($sel.color, (100% - (num+3) * 7.5))
             $color = lightness($color, lightness($color) + num)
         }
 
         /// Case for gray colors.
-        else if (c == v9) {
-            $color = hsl(C[c].hue, 0%, 50%)
+        else if ($sel.key == v9) {
+            $color = hsl($sel.hue, 0%, 50%)
             $color = darken($color, (100% - (num+2) * 17))
         }
 
         /// Case for RGB colors.
         else {
-            $hue = C[c].hue
+            $hue   = $sel.hue
             $color = hsl($hue, 70%, 70%)
             $color = darken($color, (100% - (num+2) * 7.5))
-            $color = lightness($color, lightness($color) + (num))
+            $color = lightness($color, lightness($color) + num)
         }
 
         /// Convert to HSLA format.
         $color = to_hsla($color)
 
         /// Expose color variables.
-        define(c + num, s('var(--%s-%s)', unquote(c), num), global)
-        define(c + '-' + num, $color, global)
+        define('' + s('%s%s', $sel.key, num), s('var(--%s-%s)', unquote($sel.key), num), global)
+        define('' + s('%s-%s', $sel.key, num), $color, global)
     }
 }
 
