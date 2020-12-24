@@ -122,12 +122,23 @@ for c, i in C {
 }
 */
 
-/// Generate list item colors.
+/// Generate CSS variables.
 colors = (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
+:root {
+    for color in colors {
+        for tone in 0..9 {
+            { '--%s-%s' % ((color) (tone)) }: color + '-' + tone
+        }
+    }
+}
+
+/// Generate list item styles.
 for color in colors {
     for tone in 0..9 {
         ul.colors.{ color } { '.%s%s' % ((color) (tone)) } {
-            background-color: color + '-' + tone
+            // background-color: color + '-' + tone
+            // { s('--%s-%s', color, tone)}: color + '-' + tone
+            background-color: 'var(--%s-%s)' % ((color) (tone))
         }
     }
 }
