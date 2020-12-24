@@ -20,6 +20,11 @@ prettyHSLA(x) {
     $l = base-convert(convert(xs[2]), 10, 3)
     return s('hue: %s, sat: %s%, lig: %s%, alpha: %s', $h, $s, $l, $t)
 }
+
+expose_colors($c, $i = num, $value = $color) {
+    define('' + s('%s%s', $c.key, $i), s('var(--%s-%s)', unquote($c.key), $i), global)
+    define('' + s('%s-%s', $c.key, $i), $value, global)
+}
 // }}}
 
 // {{{ Color generator
@@ -77,9 +82,7 @@ for num in 0..5 {
     else { $color = lighten($color, (num+2) * num/2%) }
     $color = to_hsla($color)
 
-    /// Expose color variables.
-    define('' + s('%s%s', $bg.key, num), s('var(--%s-%s)', unquote($bg.key), num), global)
-    define('' + s('%s-%s', $bg.key, num), $color, global)
+    expose_colors($bg)
 }
 
 // Generate foreground colors.
@@ -93,9 +96,7 @@ for num in 0..5 {
     $color = to_hsla($color)
     // $dbg += '--- FG: ' + $color
 
-    /// Expose color variables.
-    define('' + s('%s%s', $fg.key, num), s('var(--%s-%s)', unquote($fg.key), num), global)
-    define('' + s('%s-%s', $fg.key, num), $color, global)
+    expose_colors($fg)
 }
 
 for c, i in colors[2..length(colors)] {
@@ -128,9 +129,7 @@ for c, i in colors[2..length(colors)] {
         /// Convert to HSLA format.
         $color = to_hsla($color)
 
-        /// Expose color variables.
-        define('' + s('%s%s', $sel.key, num), s('var(--%s-%s)', unquote($sel.key), num), global)
-        define('' + s('%s-%s', $sel.key, num), $color, global)
+        expose_colors($sel)
     }
 }
 
