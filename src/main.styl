@@ -170,7 +170,7 @@ colors = (bg fg v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
             { '--%s-%s' % ((color) (tone)) }: color + '-' + tone
         }
     }
-    for color in colors[1..length(colors)] {
+    for color in colors[2..length(colors)] {
         for tone in 0..9 {
             { '--%s-%s' % ((color) (tone)) }: color + '-' + tone
         }
@@ -187,7 +187,7 @@ for color in colors[0..1] {
         }
     }
 }
-for color in colors[1..length(colors)] {
+for color in colors[2..length(colors)] {
     for tone in 0..9 {
         ul.colors.{ color } { '.%s%s' % ((color) (tone)) } {
             // background-color: color + '-' + tone
