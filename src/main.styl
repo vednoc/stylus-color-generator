@@ -67,14 +67,12 @@ for c, i in C {
         if (c == v0) {
             $color = darken(C[c].ac, (100% - (num+3) * 7.5))
             $color = lightness($color, lightness($color) + num)
-            $color = to_hsla($color)
         }
 
         /// Case for gray colors.
         else if (c == v9) {
             $color = hsl(C[c].hue, 0%, 50%)
-            $color = darken($color, (100% - (num+2) * 15))
-            $color = to_hsla($color)
+            $color = darken($color, (100% - (num+2) * 17))
         }
 
         /// Case for RGB colors.
@@ -83,8 +81,10 @@ for c, i in C {
             $color = hsl($hue, 70%, 70%)
             $color = darken($color, (100% - (num+2) * 7.5))
             $color = lightness($color, lightness($color) + (num))
-            $color = to_hsla($color)
         }
+
+        /// Convert to HSLA format.
+        $color = to_hsla($color)
 
         /// Expose color variables.
         define(c + num, s('var(--%s-%s)', unquote(c), num), global)
