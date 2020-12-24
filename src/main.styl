@@ -58,8 +58,46 @@ C = {
     v9: { hue: 000deg, }, //gray
 }
 
+// List with anonymous hashes.
+colors = (
+    { key: bg, color: BG } \
+    { key: fg, color: FG } \
+)
+
+// Alias colors.
+$bg = colors[0]
+$fg = colors[1]
+// $dbg += '%s; %s; :::' % (($bg) ($fg))
+
+// Generate background colors.
+for num in 0..5 {
+    $color = $bg.color
+    if num == 1 {} // Skip base BG color.
+    else if num == 0 { $color = darken($color, 10%) }
+    else { $color = lighten($color, (num+2) * num/2%) }
+
+    /// Expose color variables.
+    define('' + s('%s%s', $bg.key, num), s('var(--%s-%s)', unquote($bg.key), num), global)
+    define('' + s('%s-%s', $bg.key, num), $color, global)
+}
+
+// Generate foreground colors.
+for num in 0..5 {
+    $color = $fg.color
+    if num == 1 {} // Skip base FG color.
+    else if num == 0 { $color = lighten($color, 10%) }
+    else { $color = darken($color, (num + num/1.25) * 6%) }
+
+    $color = desaturate($color, 80%)
+    // $dbg += '--- FG: ' + $color
+
+    /// Expose color variables.
+    define('' + s('%s%s', $fg.key, num), s('var(--%s-%s)', unquote($fg.key), num), global)
+    define('' + s('%s-%s', $fg.key, num), $color, global)
+}
+
 for c, i in C {
-    $dbg += ' c: ' + c + ' i: ' + i
+    // $dbg += ' c: ' + c + ' i: ' + i
     // if c == v9 { $dbg += '' + c + i }
 
     for num in 0..9 {
@@ -121,9 +159,14 @@ for c, i in C {
 */
 
 /// Generate CSS variables.
-colors = (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
+colors = (bg fg v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
 :root {
-    for color in colors {
+    for color in colors[0..1] {
+        for tone in 0..5 {
+            { '--%s-%s' % ((color) (tone)) }: color + '-' + tone
+        }
+    }
+    for color in colors[1..length(colors)] {
         for tone in 0..9 {
             { '--%s-%s' % ((color) (tone)) }: color + '-' + tone
         }
@@ -131,7 +174,16 @@ colors = (v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
 }
 
 /// Generate list item styles.
-for color in colors {
+for color in colors[0..1] {
+    for tone in 0..5 {
+        ul.colors.{ color } { '.%s%s' % ((color) (tone)) } {
+            // background-color: color + '-' + tone
+            // { s('--%s-%s', color, tone)}: color + '-' + tone
+            background-color: 'var(--%s-%s)' % ((color) (tone))
+        }
+    }
+}
+for color in colors[1..length(colors)] {
     for tone in 0..9 {
         ul.colors.{ color } { '.%s%s' % ((color) (tone)) } {
             // background-color: color + '-' + tone
