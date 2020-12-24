@@ -75,6 +75,7 @@ for num in 0..5 {
     if num == 1 {} // Skip base BG color.
     else if num == 0 { $color = darken($color, 10%) }
     else { $color = lighten($color, (num+2) * num/2%) }
+    $color = to_hsla($color)
 
     /// Expose color variables.
     define('' + s('%s%s', $bg.key, num), s('var(--%s-%s)', unquote($bg.key), num), global)
@@ -89,6 +90,7 @@ for num in 0..5 {
     else { $color = darken($color, (num + num/1.25) * 6%) }
 
     $color = desaturate($color, 80%)
+    $color = to_hsla($color)
     // $dbg += '--- FG: ' + $color
 
     /// Expose color variables.
